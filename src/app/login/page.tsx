@@ -11,7 +11,7 @@ const LoginPage = () => {
     const [forgot, isForgot] = useState(false)
     return (
         <div className='flex flex-col h-screen justify-center items-center'>
-            <div className='text-2xl font-bold'>British Columbia Painting</div>
+            <div className='text-2xl font-bold'>Welcome to A Paint Company</div>
             {
                 forgot === true ?
                     <div className='ring-1 ring-slate-200 rounded-md mt-10'>
