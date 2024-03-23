@@ -5,7 +5,7 @@ import Col from '@/components/col'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { ArrowLeftIcon, EnterIcon, EnvelopeOpenIcon } from "@radix-ui/react-icons"
+import { ArrowLeftIcon, EnterIcon } from "@radix-ui/react-icons"
 
 const LoginPage = () => {
     const [forgot, isForgot] = useState(false)
