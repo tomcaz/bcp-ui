@@ -7,8 +7,22 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
+  safelist: [
+    {
+      pattern: /bg-\w+-[1-9]00/,
+    },
+    {
+      pattern: /bg-\w/,
+    },
+    {
+      pattern: /text-\w+-[1-9]00/,
+    },
+    {
+      pattern: /ring-\w+-[1-9]00/,
+    }
+  ],
   theme: {
     container: {
       center: true,
