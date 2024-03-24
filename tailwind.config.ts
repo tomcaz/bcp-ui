@@ -21,6 +21,9 @@ const config = {
     },
     {
       pattern: /ring-\w+-[1-9]00/,
+    },
+    {
+      pattern: /ring-\w/,
     }
   ],
   theme: {
