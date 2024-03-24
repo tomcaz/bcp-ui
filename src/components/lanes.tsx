@@ -1,3 +1,4 @@
+'use client'
 import { PlusIcon } from '@radix-ui/react-icons'
 import React, { DragEventHandler, useState } from 'react'
 import Row from './row'
