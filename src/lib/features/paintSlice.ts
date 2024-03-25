@@ -134,7 +134,7 @@ export const paintSlice = createAppSlice({
                     state.status = "idle";
                     state.orderedPaints = [
                         ...state.orderedPaints,
-                        action.payload
+                        { ...action.payload }
                     ];
                 },
             },

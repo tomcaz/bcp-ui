@@ -11,8 +11,8 @@ export type OrderType = {
     id?: string, // uuid, will be generate from backend, null is for new before save
     address?: string, // pickup location
     createdBy: string, // painter name // should be uuid but may be in the future
-    createdAt: Date,
-    painter?: string,
+    createdAt: string,
+    paint?: PaintType,
     amount: number,
     status: OrderStatus
 }
