@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "./StoreProvider";
+import Menu from "@/components/menu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,12 @@ export default function RootLayout({
     <StoreProvider>
       <html lang="en">
         <body className={inter.className}>
-          dfasf
+          <div className="text-center mt-12 font-bold text-3xl">A Painting Company Dashboard</div>
+          <br />
+          <br />
+          <Menu />
+          <br />
+          <br />
           <main>{children}</main>
         </body>
       </html>
