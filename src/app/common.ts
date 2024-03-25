@@ -20,7 +20,8 @@ export type OrderType = {
 export enum LaneType {
     available = 'available',
     runningLow = 'runningLow',
-    outOfStock = 'outOfStock'
+    outOfStock = 'outOfStock',
+    readyToPickup = 'readyToPickup'
 }
 
 export enum ColorType {

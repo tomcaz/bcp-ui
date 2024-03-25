@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 type Props = {
     children?: string | JSX.Element | JSX.Element[],
@@ -6,6 +6,9 @@ type Props = {
 }
 
 const Row = ({ children, className }: Props) => {
+
+    const [isDragging, setDragging] = useState(false)
+
     return (
         <div className={`flex ${className}`}>{children}</div>
     )

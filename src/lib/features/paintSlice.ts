@@ -26,7 +26,7 @@ const defaultResponses = {
 }
 
 export const paintSlice = createAppSlice({
-    name: "paint",
+    name: "Paint",
     initialState,
     reducers: (create) => ({
         // loading paints from db
@@ -38,7 +38,6 @@ export const paintSlice = createAppSlice({
             {
                 ...defaultResponses,
                 fulfilled: (state, action) => {
-                    console.log(action)
                     state.status = "idle";
                     state.paints = [
                         ...action.payload
