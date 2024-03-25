@@ -84,13 +84,14 @@ export const paintSlice = createAppSlice({
         // change status of paints then save to db 
         //e.g. reduce paints qty or correction of paints qty
         adjustPaintsAsync: create.asyncThunk(
-            async ({ painterUuid, paint, amount }: { painterUuid: number, paint: PaintType, amount: number }) => {
+            async ({ painterUuid, paint, amount }: { painterUuid: string, paint: PaintType, amount: number }) => {
                 const response = await changePaintQty(painterUuid, paint, amount);
                 return response;
             },
             {
                 ...defaultResponses,
                 fulfilled: (state, action) => {
+                    console.log(action.payload)
                     state.status = "idle";
                     state.paints = [
                         ...state.paints.filter(p => p.color !== action.payload.color),

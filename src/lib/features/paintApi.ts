@@ -11,7 +11,6 @@ export const fetchPaints = async (): Promise<PaintType[]> => {
     return result
 };
 
-// TODO
 export const fetchOrderedPaints = async (): Promise<OrderType[]> => {
     const response = await fetch(`${backendUrl}/paints/orders`, {
         method: "GET",
@@ -24,7 +23,6 @@ export const fetchOrderedPaints = async (): Promise<OrderType[]> => {
         paint: paints.filter((p: any) => p['_id'] === order.paint)[0]
     }) as OrderType)
 }
-// TODO
 // db to save
 export const setPaintLane = async (paint: PaintType, lane: LaneType): Promise<{ color: ColorType, lane: LaneType }> => {
     const response = await fetch(`${backendUrl}/paints`, {
@@ -37,14 +35,20 @@ export const setPaintLane = async (paint: PaintType, lane: LaneType): Promise<{ 
     const result: OrderType[] = await response.json();
     return { color: paint.color, lane }
 }
-// TODO
 // painterUuid for logging purpose, future use
 // call backend to update
-export const changePaintQty = async (painterUuid: number, paint: PaintType, amount: number): Promise<{ color: ColorType, amount: number }> => {
+export const changePaintQty = async (painterUuid: string, paint: PaintType, amount: number): Promise<{ color: ColorType, amount: number }> => {
+    const response = await fetch(`${backendUrl}/paints/amount`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            amount, paint
+        })
+    });
+    const result: OrderType[] = await response.json();
     return { color: paint.color, amount }
 }
 
-// TODO
 // update the status of the order
 export const changeOrderedPaintStatus = async (orderId: string, status: OrderStatus): Promise<{ orderId: string, status: OrderStatus }> => {
     // call backend to update
@@ -58,7 +62,6 @@ export const changeOrderedPaintStatus = async (orderId: string, status: OrderSta
     const result: OrderType[] = await response.json();
     return { orderId, status }
 }
-// TODO
 export const addOrderedPaint = async (order: OrderType): Promise<OrderType> => {
     // call backend to create an order
     const response = await fetch(`${backendUrl}/paints/orders`, {
