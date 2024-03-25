@@ -18,6 +18,12 @@ export type OrderType = {
     status: OrderStatus
 }
 
+export type UserType = {
+    username: string,
+    role: string,
+    status: string
+}
+
 export enum LaneType {
     available = 'available',
     runningLow = 'runningLow',

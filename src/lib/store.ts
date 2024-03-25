@@ -3,10 +3,11 @@ import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { paintSlice } from "./features/paintSlice";
 import { DragDropSlice } from "./features/dragdropSlice";
 import { AddOrderSlice } from "./features/addOrderSlice";
+import { sessionSlice } from "./features/sessionSlice";
 
 // slices
 const rootReducer = combineSlices(
-    paintSlice, DragDropSlice, AddOrderSlice
+    paintSlice, DragDropSlice, AddOrderSlice, sessionSlice
 );
 
 export type RootState = ReturnType<typeof rootReducer>;

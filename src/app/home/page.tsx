@@ -2,7 +2,7 @@
 import Col from '@/components/col'
 import Lane from '@/components/lanes'
 import Row from '@/components/row'
-import { ColorType, PaintType, LaneType, OrderStatus } from '../common'
+import { PaintType, LaneType, OrderStatus } from '../common'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 import { loadOrderedPaintAsync, loadPaintAsync, selectOrderedPaints, selectPaints } from '@/lib/features/paintSlice'
 import { useEffect } from 'react'

@@ -24,7 +24,7 @@ const config = {
     },
     {
       pattern: /ring-\w/,
-    }
+    },
   ],
   theme: {
     container: {

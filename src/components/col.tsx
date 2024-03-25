@@ -1,13 +1,14 @@
 import React from 'react'
 
 type Props = {
-    children: string | JSX.Element | JSX.Element[],
-    className?: string
+    children: string | JSX.Element | JSX.Element[] | null,
+    className?: string,
+    flex?: number
 }
 
-const Col = ({ children, className }: Props) => {
+const Col = ({ children, className, flex = 1 }: Props) => {
     return (
-        <div className={`flex-1 leading-10 ${className}`}>{children}</div>
+        <div className={`flex-${flex} leading-10 ${className}`}>{children}</div>
     )
 }
 
