@@ -1,5 +1,6 @@
 
 export type PaintType = {
+    _id: string,
     updatedBy?: string,
     updatedAt?: Date,
     color: ColorType,
