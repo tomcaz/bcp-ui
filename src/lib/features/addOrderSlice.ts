@@ -42,7 +42,6 @@ export const AddOrderSlice = createAppSlice({
         }), changeShowForm: create.reducer((state, action: { payload: boolean }) => {
             state.showForm = action.payload
         }), changeFormData: create.reducer((state, action: { payload: FormPayload }) => {
-            console.log(action.payload)
             state.formData = {
                 ...state.formData,
                 ...action.payload

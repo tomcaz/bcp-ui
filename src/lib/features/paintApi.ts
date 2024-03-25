@@ -1,6 +1,7 @@
+'use server'
 import { ColorType, LaneType, OrderStatus, OrderType, PaintType } from "@/app/common";
 
-const backendUrl = 'http://localhost:3001'
+const backendUrl = process.env.BACKEND_URL
 
 export const fetchPaints = async (): Promise<PaintType[]> => {
     const response = await fetch(`${backendUrl}/paints`, {

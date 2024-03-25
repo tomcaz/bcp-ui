@@ -6,12 +6,28 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { ArrowLeftIcon, EnterIcon } from "@radix-ui/react-icons"
+import { useAppDispatch } from '@/lib/hooks'
+import { loginSession } from '@/lib/features/sessionSlice'
+import { authenticate } from '../lib/actions/authenticate'
+import { handleLoginAction } from '../actions'
 
 const LoginPage = () => {
     const [forgot, isForgot] = useState(false)
+    const [errorMessage, setErrorMessage] = useState<string>()
+    const [loginData, setLoginData] = useState<{ username: string, password: string }>({ username: '', password: '' })
+    const dispatch = useAppDispatch()
+    const handleLogin = async () => {
+        try {
+            const data = await authenticate(loginData)
+            dispatch(loginSession(data))
+            await handleLoginAction(data)
+        } catch (error) {
+            setErrorMessage('Invalid username or password')
+        }
+
+    }
     return (
-        <div className='flex flex-col h-screen justify-center items-center'>
-            <div className='text-2xl font-bold'>Welcome to A Paint Company</div>
+        <div className='flex flex-col h-screen items-center'>
             {
                 forgot === true ?
                     <div className='ring-1 ring-slate-200 rounded-md mt-10'>
@@ -22,23 +38,31 @@ const LoginPage = () => {
                     </div>
                     :
                     <div className='ring-1 ring-slate-200 p-10 mt-10 rounded-md'>
-                        <Row>
-                            <Col className='flex-none w-24'><Label htmlFor="username">User Name: </Label></Col>
-                            <Col className='flex-1 w-64 pl-3'><Input id="username" type="text" placeholder="username" /></Col>
-                        </Row>
-                        <Row>
-                            <Col className='flex-none w-24'>
-                                <Label htmlFor="terms">Password: </Label></Col>
-                            <Col className='flex-1 w-64 pl-3'>
-                                <Input id="password" type="password" placeholder="Password" /></Col>
-                        </Row>
-                        <br />
-                        <Row>
-                            <Col className=''>
-                                <Button variant="outline">Login <EnterIcon className="mr-2 h-4 w-4 ml-2" /></Button>
-                                <Button variant="link" onClick={() => isForgot(!forgot)}>Forgot Password?</Button>
-                            </Col>
-                        </Row>
+                        <form action={handleLogin}>
+                            <>{errorMessage &&
+                                <Row>
+                                    <div className="text-l text-red-500 pb-4 text-center">{errorMessage}</div>
+                                </Row>}</>
+                            <Row>
+                                <Col className='flex-none w-24'><Label htmlFor="username">User Name: </Label></Col>
+                                <Col className='flex-1 w-64 pl-3'><Input type="text" placeholder="username"
+                                    onChange={e => setLoginData({ ...loginData, username: e.target.value })} /></Col>
+                            </Row>
+                            <Row>
+                                <Col className='flex-none w-24'>
+                                    <Label htmlFor="terms">Password: </Label></Col>
+                                <Col className='flex-1 w-64 pl-3'>
+                                    <Input type="password" placeholder="Password"
+                                        onChange={e => setLoginData({ ...loginData, password: e.target.value })} /></Col>
+                            </Row>
+                            <br />
+                            <Row>
+                                <Col className=''>
+                                    <Button variant="outline">Login <EnterIcon className="mr-2 h-4 w-4 ml-2" /></Button>
+                                    <Button variant="link" type='button' onClick={() => isForgot(!forgot)}>Forgot Password?</Button>
+                                </Col>
+                            </Row>
+                        </form>
                     </div>
             }
         </div>
