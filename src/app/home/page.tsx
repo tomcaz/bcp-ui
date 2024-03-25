@@ -2,7 +2,7 @@
 import Col from '@/components/col'
 import Lane from '@/components/lanes'
 import Row from '@/components/row'
-import { ColorType, PaintType, LaneType } from '../common'
+import { ColorType, PaintType, LaneType, OrderStatus } from '../common'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 import { loadOrderedPaintAsync, loadPaintAsync, selectOrderedPaints, selectPaints } from '@/lib/features/paintSlice'
 import { useEffect } from 'react'
@@ -40,7 +40,7 @@ const HomePage = () => {
                                 paint.lane === LaneType.outOfStock)} />
                     </Col>
                     <Col>
-                        <Lane title="Ready to Pickup" color="slate-500" lane={LaneType.readyToPickup} data={orderedPaints} isRTPU={true} />
+                        <Lane title="Ready to Pickup" color="slate-500" lane={LaneType.readyToPickup} data={orderedPaints.filter(order => order.status !== OrderStatus.PICK_UP)} isRTPU={true} />
                     </Col>
                 </Row>
             </div>
