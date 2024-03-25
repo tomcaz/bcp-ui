@@ -25,10 +25,10 @@ export const DragDropSlice = createAppSlice({
         }),
     }), selectors: {
         selectDragging: (slice) => slice.dragging,
-        currentDraggingPaint: (slice) => slice.currentDraggingPaint,
+        selectCurrentDraggingPaint: (slice) => slice.currentDraggingPaint,
     }
 });
 
 export const { startedDragging, cancelDragging } = DragDropSlice.actions;
 
-export const { selectDragging, currentDraggingPaint } = DragDropSlice.selectors;
+export const { selectDragging, selectCurrentDraggingPaint } = DragDropSlice.selectors;

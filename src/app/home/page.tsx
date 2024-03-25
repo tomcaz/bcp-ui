@@ -6,6 +6,7 @@ import { ColorType, PaintType, LaneType } from '../common'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 import { loadOrderedPaintAsync, loadPaintAsync, selectOrderedPaints, selectPaints } from '@/lib/features/paintSlice'
 import { useEffect } from 'react'
+import AddOrder from './add-order'
 
 const HomePage = () => {
 
@@ -39,10 +40,11 @@ const HomePage = () => {
                                 paint.lane === LaneType.outOfStock)} />
                     </Col>
                     <Col>
-                        <Lane title="Ready to Pickup" color="slate-500" lane={LaneType.readyToPickup} data={[]} isRTPU={true} />
+                        <Lane title="Ready to Pickup" color="slate-500" lane={LaneType.readyToPickup} data={orderedPaints} isRTPU={true} />
                     </Col>
                 </Row>
             </div>
+            <AddOrder />
         </div>
     )
 }
