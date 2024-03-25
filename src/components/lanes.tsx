@@ -4,21 +4,37 @@ import React, { DragEventHandler, useState } from 'react'
 import Row from './row'
 import Col from './col'
 import Card from './card'
-import { PaintType } from '@/app/common'
+import { LaneType, PaintType } from '@/app/common'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
+import { currentDraggingPaint } from '@/lib/features/dragdropSlice'
+import { changeLaneAsync } from '@/lib/features/paintSlice'
 
 type Props = {
     title: string,
     color: string // tailwind colors
     data: PaintType[],
-    isRTPU?: boolean
+    isRTPU?: boolean,
+    lane: LaneType
 }
 
-const Lane = ({ title, color, data, isRTPU = false }: Props) => {
-    const [dropping, isDropping] = useState(false)
+const Lane = ({ title, color, data, isRTPU = false, lane }: Props) => {
+    const [isDragging, setDragging] = useState(false)
 
-    const onDropping = (event: any) => {
-        console.log(event.target.parent)
-        isDropping(true)
+    const droppedPaint = useAppSelector(currentDraggingPaint)
+    const dispatch = useAppDispatch()
+
+    const handleDrop = (event: any) => {
+        event.preventDefault()
+        dispatch(changeLaneAsync({
+            lane, paint: droppedPaint!
+        }))
+        setDragging(false)
+    }
+
+    const handleDrag = (e: any) => {
+        if(lane !== LaneType.readyToPickup)
+        e.preventDefault();
+        setDragging(true)
     }
 
     return (
@@ -36,8 +52,8 @@ const Lane = ({ title, color, data, isRTPU = false }: Props) => {
                     </Col>
                 }</>
             </Row>
-            <Row className='flex-col justify-start h-[600px] pl-4 pr-4'>
-                <div className='h-max' onDragOver={onDropping}>
+            <Row className={`flex-col justify-start h-[600px] pl-4 pr-4 ${isDragging ? (lane === LaneType.readyToPickup? 'bg-red-200':'bg-blue-200') : ''}`}>
+                <div className='h-full' onDrop={handleDrop} onDragOver={handleDrag} onDragEnd={() => setDragging(false)} onDragLeave={() => setDragging(false)}>
                     {data.length > 0 &&
                         data.map((paint, index) => (
                             <Card key={index} paint={paint} />

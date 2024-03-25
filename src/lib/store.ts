@@ -1,10 +1,11 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { paintSlice } from "./features/paintSlice";
+import { DragDropSlice } from "./features/dragdropSlice";
 
 // slices
 const rootReducer = combineSlices(
-    paintSlice
+    paintSlice, DragDropSlice
 );
 
 export type RootState = ReturnType<typeof rootReducer>;
